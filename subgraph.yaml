@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MorphoBlue
-    network: base
+    network: mainnet
     source:
       abi: Morpho
       address: "0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb"
-      startBlock: 13977148
+      startBlock: 18883124
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
