@@ -1,0 +1,28 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MorphoBlue
+    network: base
+    source:
+      address: "0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb"
+      abi: Morpho
+      startBlock: 13977148
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AssetMetric
+      abis:
+        - name: Morpho
+          file: ./abis/Morpho.json
+      eventHandlers:
+        - event: CreateMarket(indexed bytes32,(address,address,address,address,uint256))
+          handler: handleCreate 
+        - event: Supply(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleSupply
+        - event: Withdraw(indexed bytes32,address,indexed address,indexed address,uint256,uint256)
+          handler: handleWithdraw
+      file: ./src/morpho-metrics.ts

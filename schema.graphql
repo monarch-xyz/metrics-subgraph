@@ -1,0 +1,35 @@
+type Market @entity {
+  id: Bytes!
+  marketId: Bytes!
+  
+  # loan asset address
+  loan: Bytes!
+  
+  # collateral asset address
+  collateral: Bytes!
+  
+  # IRM address
+  irm: Bytes!
+
+  # Oracle
+  oracle: Bytes!
+
+  lltv: BigInt!
+}
+
+type AssetMetric @entity {
+  # Loan asset
+  id: Bytes! 
+
+  # Total supply through Monarch
+  totalSupply: BigInt!
+
+  # Total withdraw through Monarch
+  totalWithdraw: BigInt!
+
+  # Number of supply events
+  numOfSupply: Int!
+
+  # Number of withdraw events
+  numOfWithdraw: Int!
+}
