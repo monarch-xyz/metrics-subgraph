@@ -1,0 +1,15 @@
+{
+  "mbase": {
+      "MorphoBlue": {
+          "address": "0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb",
+          "startBlock": 13977148
+      }
+  },
+  "mainnet": {
+      "MorphoBlue": {
+          "address": "0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb",
+          "startBlock": 18883124
+          
+      }
+  }
+}

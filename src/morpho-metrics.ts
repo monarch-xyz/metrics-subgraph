@@ -56,6 +56,6 @@ export function handleWithdraw(event: Withdraw): void {
 
 function isMonarchTx(calldata: Bytes): boolean {
    // if the last 2 byte ends with "BEEF"
-   let length = calldata.byteLength;
+   let length = calldata.length;
   return calldata.slice(length - 2, length) == Bytes.fromHexString("BEEF");
 }

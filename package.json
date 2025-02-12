@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node undefined monarch-xyz/metrics-subgraph",
-    "create-local": "graph create --node http://localhost:8020/ monarch-xyz/metrics-subgraph",
-    "remove-local": "graph remove --node http://localhost:8020/ monarch-xyz/metrics-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 monarch-xyz/metrics-subgraph",
+    "deploy": "graph deploy monarch-metrics",
+    "create-local": "graph create --node http://localhost:8020/ monarch-metrics",
+    "remove-local": "graph remove --node http://localhost:8020/ monarch-metrics",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 monarch-metrics",
     "test": "graph test"
   },
   "dependencies": {
