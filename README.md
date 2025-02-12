@@ -24,9 +24,18 @@ yarn build --network base
 graph auth <key>
 
 # Base subgraph
-graph deploy monarch-metrics
+graph deploy monarch-metrics --network base
 
 # Mainnet subgraph
-graph deploy monarch-metrics-mainnet
+graph deploy monarch-metrics-mainnet --network mainnet
+
+```
+
+### Testing
+
+```shell
+
+# Run with docker
+graph test -d
 
 ```

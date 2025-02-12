@@ -54,8 +54,8 @@ export function handleWithdraw(event: Withdraw): void {
   assetMetric.save();
 }
 
-function isMonarchTx(calldata: Bytes): boolean {
+export function isMonarchTx(calldata: Bytes): boolean {
    // if the last 2 byte ends with "BEEF"
-   let length = calldata.length;
-  return calldata.slice(length - 2, length) == Bytes.fromHexString("BEEF");
+   let calldataString = calldata.toHex();
+  return calldataString.endsWith("beef")
 }
