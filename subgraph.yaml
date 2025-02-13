@@ -15,6 +15,11 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - AssetMetric
+        - Market
+        - UserTransaction
+        - SupplyEvent
+        - WithdrawEvent
+        - User
       abis:
         - name: Morpho
           file: ./abis/Morpho.json

@@ -1,35 +1,75 @@
 type Market @entity {
   id: Bytes!
   marketId: Bytes!
-  
-  # loan asset address
   loan: Bytes!
-  
-  # collateral asset address
   collateral: Bytes!
-  
-  # IRM address
   irm: Bytes!
-
-  # Oracle
   oracle: Bytes!
-
   lltv: BigInt!
 }
 
+type UserTransaction @entity {
+  id: Bytes! # tx hash
+  user: Bytes! # user address
+  msgSender: Bytes! # contract address
+  timestamp: BigInt!
+  
+  supplyCount: Int!
+  withdrawCount: Int!
+  supplies: [SupplyEvent!]! @derivedFrom(field: "transaction")
+  withdrawals: [WithdrawEvent!]! @derivedFrom(field: "transaction")
+  
+  supplyVolume: BigInt!
+  withdrawVolume: BigInt!
+}
+
+type SupplyEvent @entity {
+  id: Bytes! # tx hash + log index
+  transaction: UserTransaction!
+  user: User!
+  market: Market!
+  amount: BigInt!
+  timestamp: BigInt!
+}
+
+type WithdrawEvent @entity {
+  id: Bytes! # tx hash + log index
+  transaction: UserTransaction!
+  user: User!
+  market: Market!
+  amount: BigInt!
+  timestamp: BigInt!
+}
+
+type User @entity {
+  id: Bytes! # user address
+  firstTxTimestamp: BigInt!
+  lastTxTimestamp: BigInt!
+  totalTransactionCount: Int!
+  loyaltyScore: BigInt!
+  supplies: [SupplyEvent!]! @derivedFrom(field: "user")
+  withdrawals: [WithdrawEvent!]! @derivedFrom(field: "user")
+}
+
 type AssetMetric @entity {
-  # Loan asset
-  id: Bytes! 
+  id: Bytes! # asset address
+  
+  totalSupplyVolume: BigInt!
+  totalWithdrawVolume: BigInt!
+  
+  supplyCount: Int!
+  withdrawCount: Int!
+  uniqueSuppliers: Int!
+  
+  lastUpdateTimestamp: BigInt!
+}
 
-  # Total supply through Monarch
-  totalSupply: BigInt!
-
-  # Total withdraw through Monarch
-  totalWithdraw: BigInt!
-
-  # Number of supply events
-  numOfSupply: Int!
-
-  # Number of withdraw events
-  numOfWithdraw: Int!
+type UserAssetMetric @entity {
+  id: Bytes! # user + asset address concatenated
+  user: Bytes!
+  asset: Bytes!
+  
+  knownSupplyVolume: BigInt!
+  knownWithdrawVolume: BigInt!
+  lastUpdateTimestamp: BigInt!
 }

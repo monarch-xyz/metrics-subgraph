@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class AccrueInterest extends ethereum.Event {
@@ -97,7 +97,7 @@ export class CreateMarket__Params {
 
   get marketParams(): CreateMarketMarketParamsStruct {
     return changetype<CreateMarketMarketParamsStruct>(
-      this._event.parameters[1].value.toTuple()
+      this._event.parameters[1].value.toTuple(),
     );
   }
 }
@@ -575,7 +575,7 @@ export class Morpho__idToMarketParamsResult {
     value1: Address,
     value2: Address,
     value3: Address,
-    value4: BigInt
+    value4: BigInt,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -676,7 +676,7 @@ export class Morpho__marketResult {
     value2: BigInt,
     value3: BigInt,
     value4: BigInt,
-    value5: BigInt
+    value5: BigInt,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -904,7 +904,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.call(
       "DOMAIN_SEPARATOR",
       "DOMAIN_SEPARATOR():(bytes32)",
-      []
+      [],
     );
 
     return result[0].toBytes();
@@ -914,7 +914,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.tryCall(
       "DOMAIN_SEPARATOR",
       "DOMAIN_SEPARATOR():(bytes32)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -928,7 +928,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    receiver: Address
+    receiver: Address,
   ): Morpho__borrowResult {
     let result = super.call(
       "borrow",
@@ -938,8 +938,8 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromAddress(receiver)
-      ]
+        ethereum.Value.fromAddress(receiver),
+      ],
     );
 
     return new Morpho__borrowResult(result[0].toBigInt(), result[1].toBigInt());
@@ -950,7 +950,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    receiver: Address
+    receiver: Address,
   ): ethereum.CallResult<Morpho__borrowResult> {
     let result = super.tryCall(
       "borrow",
@@ -960,21 +960,21 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromAddress(receiver)
-      ]
+        ethereum.Value.fromAddress(receiver),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Morpho__borrowResult(value[0].toBigInt(), value[1].toBigInt())
+      new Morpho__borrowResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
   extSloads(slots: Array<Bytes>): Array<Bytes> {
     let result = super.call("extSloads", "extSloads(bytes32[]):(bytes32[])", [
-      ethereum.Value.fromFixedBytesArray(slots)
+      ethereum.Value.fromFixedBytesArray(slots),
     ]);
 
     return result[0].toBytesArray();
@@ -984,7 +984,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.tryCall(
       "extSloads",
       "extSloads(bytes32[]):(bytes32[])",
-      [ethereum.Value.fromFixedBytesArray(slots)]
+      [ethereum.Value.fromFixedBytesArray(slots)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1012,7 +1012,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.call(
       "idToMarketParams",
       "idToMarketParams(bytes32):(address,address,address,address,uint256)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
 
     return new Morpho__idToMarketParamsResult(
@@ -1020,17 +1020,17 @@ export class Morpho extends ethereum.SmartContract {
       result[1].toAddress(),
       result[2].toAddress(),
       result[3].toAddress(),
-      result[4].toBigInt()
+      result[4].toBigInt(),
     );
   }
 
   try_idToMarketParams(
-    param0: Bytes
+    param0: Bytes,
   ): ethereum.CallResult<Morpho__idToMarketParamsResult> {
     let result = super.tryCall(
       "idToMarketParams",
       "idToMarketParams(bytes32):(address,address,address,address,uint256)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1042,8 +1042,8 @@ export class Morpho extends ethereum.SmartContract {
         value[1].toAddress(),
         value[2].toAddress(),
         value[3].toAddress(),
-        value[4].toBigInt()
-      )
+        value[4].toBigInt(),
+      ),
     );
   }
 
@@ -1051,7 +1051,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.call(
       "isAuthorized",
       "isAuthorized(address,address):(bool)",
-      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)],
     );
 
     return result[0].toBoolean();
@@ -1059,12 +1059,12 @@ export class Morpho extends ethereum.SmartContract {
 
   try_isAuthorized(
     param0: Address,
-    param1: Address
+    param1: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isAuthorized",
       "isAuthorized(address,address):(bool)",
-      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1075,7 +1075,7 @@ export class Morpho extends ethereum.SmartContract {
 
   isIrmEnabled(param0: Address): boolean {
     let result = super.call("isIrmEnabled", "isIrmEnabled(address):(bool)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
 
     return result[0].toBoolean();
@@ -1083,7 +1083,7 @@ export class Morpho extends ethereum.SmartContract {
 
   try_isIrmEnabled(param0: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall("isIrmEnabled", "isIrmEnabled(address):(bool)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1094,7 +1094,7 @@ export class Morpho extends ethereum.SmartContract {
 
   isLltvEnabled(param0: BigInt): boolean {
     let result = super.call("isLltvEnabled", "isLltvEnabled(uint256):(bool)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
     return result[0].toBoolean();
@@ -1104,7 +1104,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.tryCall(
       "isLltvEnabled",
       "isLltvEnabled(uint256):(bool)",
-      [ethereum.Value.fromUnsignedBigInt(param0)]
+      [ethereum.Value.fromUnsignedBigInt(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1118,7 +1118,7 @@ export class Morpho extends ethereum.SmartContract {
     borrower: Address,
     seizedAssets: BigInt,
     repaidShares: BigInt,
-    data: Bytes
+    data: Bytes,
   ): Morpho__liquidateResult {
     let result = super.call(
       "liquidate",
@@ -1128,13 +1128,13 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromAddress(borrower),
         ethereum.Value.fromUnsignedBigInt(seizedAssets),
         ethereum.Value.fromUnsignedBigInt(repaidShares),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
 
     return new Morpho__liquidateResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -1143,7 +1143,7 @@ export class Morpho extends ethereum.SmartContract {
     borrower: Address,
     seizedAssets: BigInt,
     repaidShares: BigInt,
-    data: Bytes
+    data: Bytes,
   ): ethereum.CallResult<Morpho__liquidateResult> {
     let result = super.tryCall(
       "liquidate",
@@ -1153,15 +1153,15 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromAddress(borrower),
         ethereum.Value.fromUnsignedBigInt(seizedAssets),
         ethereum.Value.fromUnsignedBigInt(repaidShares),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Morpho__liquidateResult(value[0].toBigInt(), value[1].toBigInt())
+      new Morpho__liquidateResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -1169,7 +1169,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.call(
       "market",
       "market(bytes32):(uint128,uint128,uint128,uint128,uint128,uint128)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
 
     return new Morpho__marketResult(
@@ -1178,7 +1178,7 @@ export class Morpho extends ethereum.SmartContract {
       result[2].toBigInt(),
       result[3].toBigInt(),
       result[4].toBigInt(),
-      result[5].toBigInt()
+      result[5].toBigInt(),
     );
   }
 
@@ -1186,7 +1186,7 @@ export class Morpho extends ethereum.SmartContract {
     let result = super.tryCall(
       "market",
       "market(bytes32):(uint128,uint128,uint128,uint128,uint128,uint128)",
-      [ethereum.Value.fromFixedBytes(param0)]
+      [ethereum.Value.fromFixedBytes(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1199,14 +1199,14 @@ export class Morpho extends ethereum.SmartContract {
         value[2].toBigInt(),
         value[3].toBigInt(),
         value[4].toBigInt(),
-        value[5].toBigInt()
-      )
+        value[5].toBigInt(),
+      ),
     );
   }
 
   nonce(param0: Address): BigInt {
     let result = super.call("nonce", "nonce(address):(uint256)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
 
     return result[0].toBigInt();
@@ -1214,7 +1214,7 @@ export class Morpho extends ethereum.SmartContract {
 
   try_nonce(param0: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("nonce", "nonce(address):(uint256)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1244,28 +1244,28 @@ export class Morpho extends ethereum.SmartContract {
       "position(bytes32,address):(uint256,uint128,uint128)",
       [
         ethereum.Value.fromFixedBytes(param0),
-        ethereum.Value.fromAddress(param1)
-      ]
+        ethereum.Value.fromAddress(param1),
+      ],
     );
 
     return new Morpho__positionResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toBigInt()
+      result[2].toBigInt(),
     );
   }
 
   try_position(
     param0: Bytes,
-    param1: Address
+    param1: Address,
   ): ethereum.CallResult<Morpho__positionResult> {
     let result = super.tryCall(
       "position",
       "position(bytes32,address):(uint256,uint128,uint128)",
       [
         ethereum.Value.fromFixedBytes(param0),
-        ethereum.Value.fromAddress(param1)
-      ]
+        ethereum.Value.fromAddress(param1),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1275,8 +1275,8 @@ export class Morpho extends ethereum.SmartContract {
       new Morpho__positionResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toBigInt()
-      )
+        value[2].toBigInt(),
+      ),
     );
   }
 
@@ -1285,7 +1285,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    data: Bytes
+    data: Bytes,
   ): Morpho__repayResult {
     let result = super.call(
       "repay",
@@ -1295,8 +1295,8 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
 
     return new Morpho__repayResult(result[0].toBigInt(), result[1].toBigInt());
@@ -1307,7 +1307,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    data: Bytes
+    data: Bytes,
   ): ethereum.CallResult<Morpho__repayResult> {
     let result = super.tryCall(
       "repay",
@@ -1317,15 +1317,15 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Morpho__repayResult(value[0].toBigInt(), value[1].toBigInt())
+      new Morpho__repayResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -1334,7 +1334,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    data: Bytes
+    data: Bytes,
   ): Morpho__supplyResult {
     let result = super.call(
       "supply",
@@ -1344,8 +1344,8 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
 
     return new Morpho__supplyResult(result[0].toBigInt(), result[1].toBigInt());
@@ -1356,7 +1356,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    data: Bytes
+    data: Bytes,
   ): ethereum.CallResult<Morpho__supplyResult> {
     let result = super.tryCall(
       "supply",
@@ -1366,15 +1366,15 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromBytes(data)
-      ]
+        ethereum.Value.fromBytes(data),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Morpho__supplyResult(value[0].toBigInt(), value[1].toBigInt())
+      new Morpho__supplyResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 
@@ -1383,7 +1383,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    receiver: Address
+    receiver: Address,
   ): Morpho__withdrawResult {
     let result = super.call(
       "withdraw",
@@ -1393,13 +1393,13 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromAddress(receiver)
-      ]
+        ethereum.Value.fromAddress(receiver),
+      ],
     );
 
     return new Morpho__withdrawResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
@@ -1408,7 +1408,7 @@ export class Morpho extends ethereum.SmartContract {
     assets: BigInt,
     shares: BigInt,
     onBehalf: Address,
-    receiver: Address
+    receiver: Address,
   ): ethereum.CallResult<Morpho__withdrawResult> {
     let result = super.tryCall(
       "withdraw",
@@ -1418,15 +1418,15 @@ export class Morpho extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(assets),
         ethereum.Value.fromUnsignedBigInt(shares),
         ethereum.Value.fromAddress(onBehalf),
-        ethereum.Value.fromAddress(receiver)
-      ]
+        ethereum.Value.fromAddress(receiver),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Morpho__withdrawResult(value[0].toBigInt(), value[1].toBigInt())
+      new Morpho__withdrawResult(value[0].toBigInt(), value[1].toBigInt()),
     );
   }
 }
@@ -1480,7 +1480,7 @@ export class AccrueInterestCall__Inputs {
 
   get marketParams(): AccrueInterestCallMarketParamsStruct {
     return changetype<AccrueInterestCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 }
@@ -1534,7 +1534,7 @@ export class BorrowCall__Inputs {
 
   get marketParams(): BorrowCallMarketParamsStruct {
     return changetype<BorrowCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -1612,7 +1612,7 @@ export class CreateMarketCall__Inputs {
 
   get marketParams(): CreateMarketCallMarketParamsStruct {
     return changetype<CreateMarketCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 }
@@ -1764,7 +1764,7 @@ export class LiquidateCall__Inputs {
 
   get marketParams(): LiquidateCallMarketParamsStruct {
     return changetype<LiquidateCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -1842,7 +1842,7 @@ export class RepayCall__Inputs {
 
   get marketParams(): RepayCallMarketParamsStruct {
     return changetype<RepayCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -1954,13 +1954,13 @@ export class SetAuthorizationWithSigCall__Inputs {
 
   get authorization(): SetAuthorizationWithSigCallAuthorizationStruct {
     return changetype<SetAuthorizationWithSigCallAuthorizationStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
   get signature(): SetAuthorizationWithSigCallSignatureStruct {
     return changetype<SetAuthorizationWithSigCallSignatureStruct>(
-      this._call.inputValues[1].value.toTuple()
+      this._call.inputValues[1].value.toTuple(),
     );
   }
 }
@@ -2028,7 +2028,7 @@ export class SetFeeCall__Inputs {
 
   get marketParams(): SetFeeCallMarketParamsStruct {
     return changetype<SetFeeCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -2146,7 +2146,7 @@ export class SupplyCall__Inputs {
 
   get marketParams(): SupplyCallMarketParamsStruct {
     return changetype<SupplyCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -2224,7 +2224,7 @@ export class SupplyCollateralCall__Inputs {
 
   get marketParams(): SupplyCollateralCallMarketParamsStruct {
     return changetype<SupplyCollateralCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -2290,7 +2290,7 @@ export class WithdrawCall__Inputs {
 
   get marketParams(): WithdrawCallMarketParamsStruct {
     return changetype<WithdrawCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
@@ -2368,7 +2368,7 @@ export class WithdrawCollateralCall__Inputs {
 
   get marketParams(): WithdrawCollateralCallMarketParamsStruct {
     return changetype<WithdrawCollateralCallMarketParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 
